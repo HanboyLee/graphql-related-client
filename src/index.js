@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState, useEffect } from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+//apollo graphql
+import { client } from './configs/client';
+import { ApolloProvider } from '@apollo/client';
+//pages
+import BookList from './page/bookList';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const Main = () => {
+    return (
+        <div>
+            <BookList />
+            <Router>{/* <Message ws={ws} /> */}</Router>
+        </div>
+    );
+};
+
+ReactDom.render(
+    <ApolloProvider client={client}>
+        <Main />
+    </ApolloProvider>,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
